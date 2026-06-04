@@ -294,7 +294,7 @@ export default function Appointments() {
   const todayLabel = formatFullDate(today);
 
   return (
-    <div className="space-y-8 max-w-2xl">
+    <div className="space-y-8 max-w-3xl mx-auto">
 
       {/* ── Page heading ──────────────────────────────────────────────── */}
       <div>

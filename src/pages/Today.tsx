@@ -358,7 +358,9 @@ export default function Today() {
   }
 
   return (
-    <div className="space-y-8 max-w-2xl">
+    <div className="space-y-8 max-w-3xl lg:max-w-5xl mx-auto">
+      {/* Centered, comfortably-wide container so content is balanced rather
+          than jammed to the left on desktop. Widens on lg for two columns. */}
 
       {/* ── Page heading ─────────────────────────────────────────────── */}
       {/* This page has its own h1; the orientation bar already provides the
@@ -379,85 +381,95 @@ export default function Today() {
         </Banner>
       )}
 
-      {/* ── Next thing to do ─────────────────────────────────────────── */}
-      <section aria-label="Next thing to do">
-        {featured ? (
-          <NextThingCard
-            item={featured}
-            status={computeStatus(featured, nowMin)}
-            onDone={() => markDone(featured.id)}
-          />
-        ) : (
-          <AllDoneCard />
-        )}
-      </section>
+      {/* ── Desktop (lg+) two-column layout; single column on mobile/tablet.
+          DOM order is unchanged (Next thing → Later today → Quick actions),
+          so the tab/focus order is preserved. ────────────────────────── */}
+      <div className="space-y-8 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-start">
 
-      {/* ── Remaining items — max 4, no scroll/carousel ───────────────── */}
-      {remaining.length > 0 && (
-        <section aria-labelledby="later-heading">
-          <h2 id="later-heading" className="text-xl font-semibold text-neutral-800 mb-4">
-            Later today
-          </h2>
-          <ul className="space-y-3 list-none p-0 m-0" role="list">
-            {remaining.map(item => (
-              <li key={item.id}>
-                <RemainingCard
-                  item={item}
-                  status={computeStatus(item, nowMin)}
-                />
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 text-sm text-right">
-            <Link to="/app/schedule" className="text-calm-600 font-semibold">
-              See full day schedule
-            </Link>
-          </p>
-        </section>
-      )}
+        {/* Left column: the next task and the rest of today */}
+        <div className="space-y-8">
 
-      {/* ── Quick-action tiles ────────────────────────────────────────── */}
-      <section aria-labelledby="actions-heading">
-        <h2 id="actions-heading" className="text-xl font-semibold text-neutral-800 mb-4">
-          Quick actions
-        </h2>
-        <div className="grid grid-cols-2 gap-4">
-          <BigActionTile
-            icon={<Pill className="w-9 h-9" />}
-            label="Medications"
-            description="View and mark today's medicines"
-            colour="calm"
-            onClick={() => navigate('/app/medications')}
-          />
-          <BigActionTile
-            icon={<Calendar className="w-9 h-9" />}
-            label="Appointments"
-            description="See your upcoming visits and calls"
-            colour="warm"
-            onClick={() => navigate('/app/appointments')}
-          />
-          <BigActionTile
-            icon={<CheckCircle2 className="w-9 h-9" />}
-            label={checkedIn ? 'Checked In' : 'Check In'}
-            description={
-              checkedIn
-                ? `Checked in at ${checkInTime}`
-                : "Let your caregiver know you're well"
-            }
-            colour={checkedIn ? 'success' : 'neutral'}
-            onClick={handleCheckIn}
-            disabled={checkedIn}
-          />
-          <BigActionTile
-            icon={<PhoneCall className="w-9 h-9" />}
-            label="Call Caregiver"
-            description="Call Joyce — 07700 900 456"
-            colour="success"
-            onClick={() => { window.location.href = 'tel:07700900456'; }}
-          />
+          {/* ── Next thing to do ─────────────────────────────────────── */}
+          <section aria-label="Next thing to do">
+            {featured ? (
+              <NextThingCard
+                item={featured}
+                status={computeStatus(featured, nowMin)}
+                onDone={() => markDone(featured.id)}
+              />
+            ) : (
+              <AllDoneCard />
+            )}
+          </section>
+
+          {/* ── Remaining items — max 4, no scroll/carousel ──────────── */}
+          {remaining.length > 0 && (
+            <section aria-labelledby="later-heading">
+              <h2 id="later-heading" className="text-xl font-semibold text-neutral-800 mb-4">
+                Later today
+              </h2>
+              <ul className="space-y-3 list-none p-0 m-0" role="list">
+                {remaining.map(item => (
+                  <li key={item.id}>
+                    <RemainingCard
+                      item={item}
+                      status={computeStatus(item, nowMin)}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm text-right">
+                <Link to="/app/schedule" className="text-calm-600 font-semibold">
+                  See full day schedule
+                </Link>
+              </p>
+            </section>
+          )}
         </div>
-      </section>
 
+        {/* Right column: quick-action tiles */}
+        <section aria-labelledby="actions-heading">
+          <h2 id="actions-heading" className="text-xl font-semibold text-neutral-800 mb-4">
+            Quick actions
+          </h2>
+          <div className="grid grid-cols-2 gap-4">
+            <BigActionTile
+              icon={<Pill className="w-9 h-9" />}
+              label="Medications"
+              description="View and mark today's medicines"
+              colour="calm"
+              onClick={() => navigate('/app/medications')}
+            />
+            <BigActionTile
+              icon={<Calendar className="w-9 h-9" />}
+              label="Appointments"
+              description="See your upcoming visits and calls"
+              colour="warm"
+              onClick={() => navigate('/app/appointments')}
+            />
+            <BigActionTile
+              icon={<CheckCircle2 className="w-9 h-9" />}
+              label={checkedIn ? 'Checked In' : 'Check In'}
+              description={
+                checkedIn
+                  ? `Checked in at ${checkInTime}`
+                  : "Let your caregiver know you're well"
+              }
+              colour={checkedIn ? 'success' : 'neutral'}
+              onClick={handleCheckIn}
+              disabled={checkedIn}
+            />
+            <BigActionTile
+              icon={<PhoneCall className="w-9 h-9" />}
+              label="Call Caregiver"
+              description="Call Joyce — 07700 900 456"
+              colour="success"
+              onClick={() => { window.location.href = 'tel:07700900456'; }}
+            />
+          </div>
+        </section>
+
+      </div>
     </div>
   );
 }

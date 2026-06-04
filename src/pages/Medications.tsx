@@ -72,7 +72,7 @@ export default function Medications() {
   const pendingCount = meds.length - takenCount;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-3xl mx-auto">
       {/* ── Page header ─────────────────────────────────────────────────── */}
       <div>
         <h1 className="text-2xl font-bold text-neutral-800">Medicines</h1>
