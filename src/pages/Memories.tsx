@@ -35,7 +35,7 @@ export default function Memories() {
   const rest = filtered.filter((c) => !c.pinned);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-4xl mx-auto">
       {/* ── Page header ─────────────────────────────────────────────────── */}
       <div>
         <h1 className="text-2xl font-bold text-neutral-800">Memories</h1>
@@ -69,7 +69,7 @@ export default function Memories() {
             <Pin className="w-4 h-4" aria-hidden="true" />
             Pinned
           </h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 lg:items-stretch">
             {pinned.map((card) => (
               <MemoryCardItem
                 key={card.id}
@@ -90,7 +90,7 @@ export default function Memories() {
               More memories
             </h2>
           )}
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 lg:items-stretch">
             {rest.map((card) => (
               <MemoryCardItem
                 key={card.id}
@@ -124,15 +124,15 @@ function MemoryCardItem({
   const { Icon, label } = categoryConfig[card.category];
 
   return (
-    <article className="card card-hover overflow-hidden p-0">
-      {/* Photo */}
+    <article className="card card-hover overflow-hidden p-0 h-full flex flex-col">
+      {/* Photo — fixed 16:9 aspect box so subjects aren't cropped awkwardly
+          and every card's image is the same height. */}
       {card.imageUrl && (
-        <div className="w-full h-44 overflow-hidden">
+        <div className="w-full aspect-[16/9] overflow-hidden bg-neutral-100">
           <img
             src={card.imageUrl}
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full object-cover"
+            alt={card.title}
+            className="w-full h-full object-cover object-center"
             loading="lazy"
           />
         </div>
