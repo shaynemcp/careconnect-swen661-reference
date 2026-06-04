@@ -232,24 +232,91 @@ Script Description
 
 Screens & walkthrough
 
-> **Capturing screenshots:** run `npm run dev`, then `npm run screenshots` (Playwright), or capture manually with your OS tool. Save images to `docs/screenshots/` using the filenames below so links resolve.
+> **Capturing screenshots:** run `npm run dev`, then `npm run screenshots` (Playwright), or capture manually with your OS tool. Images live in `docs/screenshots/` and are embedded below.
 
-# Screen File What it shows
+### 1. Landing page
 
-1 Landing page `01-landing.png` Public entry: hero, "How it helps" cards, privacy reassurance, Sign up / Sign in CTAs.
-2 AI assistant `02-assistant.png` Accessible chatbot panel (aria-live, focus management) scoped to onboarding — no medical advice.
-3 Sign up `03-signup.png` Accessible registration form with visible labels and inline validation.
-4 Sign in `04-signin.png` Mock auth with the same accessible form pattern.
-5 Role chooser `05-role-chooser.png` Post sign-in choice between Care Recipient and Caregiver; persists for future logins.
-6 Patient — Today `06-patient-today.png` Calm home with "Next thing to do" and the day's remaining items.
-7 Patient — Medications `07-patient-medications.png` Pill images, plain-language doses, always-visible status.
-8 Medication taken `08-medication-taken.png` Polite confirmation plus a 10-second undo.
-9 Patient — Appointments `09-patient-appointments.png` Chronological appointments with full-word dates and directions.
-10 Caregiver — Dashboard `10-caregiver-dashboard.png` Adherence summary, alerts region, recent activity.
-11 Caregiver — Manage meds `11-caregiver-medications.png` Medication list with edit and confirm-on-delete.
-12 Caregiver — Med form `12-caregiver-medication-form.png` Accessible add/edit form with full validation.
-13 Caregiver — Appointments `13-caregiver-appointments.png` Appointment list and accessible add/edit form.
-14 Caregiver — Activity `14-caregiver-activity.png` Timestamped log of taken/skipped doses and check-ins.
+Public entry: hero, "How it helps" cards, privacy reassurance, Sign up / Sign in CTAs.
+
+![Landing page](docs/screenshots/01-landing.png)
+
+### 2. AI assistant
+
+Accessible chatbot panel (aria-live, focus management) scoped to onboarding — no medical advice.
+
+![AI assistant panel](docs/screenshots/02-assistant.png)
+
+### 3. Sign up
+
+Accessible registration form with visible labels and inline validation.
+
+![Sign up form](docs/screenshots/03-signup.png)
+
+### 4. Sign in
+
+Mock auth with the same accessible form pattern.
+
+![Sign in form](docs/screenshots/04-signin.png)
+
+### 5. Role chooser
+
+Post sign-in choice between Care Recipient and Caregiver; persists for future logins.
+
+![Role chooser](docs/screenshots/05-role-chooser.png)
+
+### 6. Patient — Today
+
+Calm home with "Next thing to do" and the day's remaining items.
+
+![Patient Today home](docs/screenshots/06-patient-today.png)
+
+### 7. Patient — Medications
+
+Pill images, plain-language doses, always-visible status.
+
+![Patient medications list](docs/screenshots/07-patient-medications.png)
+
+### 8. Medication taken
+
+Polite confirmation plus a 10-second undo.
+
+![Medication marked as taken](docs/screenshots/08-medication-taken.png)
+
+### 9. Patient — Appointments
+
+Chronological appointments with full-word dates and directions.
+
+![Patient appointments](docs/screenshots/09-patient-appointments.png)
+
+### 10. Caregiver — Dashboard
+
+Adherence summary, alerts region, recent activity.
+
+![Caregiver dashboard](docs/screenshots/10-caregiver-dashboard.png)
+
+### 11. Caregiver — Manage medications
+
+Medication list with edit and confirm-on-delete.
+
+![Caregiver manage medications](docs/screenshots/11-caregiver-medications.png)
+
+### 12. Caregiver — Medication form
+
+Accessible add/edit form with full validation.
+
+![Caregiver medication form](docs/screenshots/12-caregiver-medication-form.png)
+
+### 13. Caregiver — Appointments
+
+Appointment list and accessible add/edit form.
+
+![Caregiver manage appointments](docs/screenshots/13-caregiver-appointments.png)
+
+### 14. Caregiver — Activity
+
+Timestamped log of taken/skipped doses and check-ins.
+
+![Caregiver activity log](docs/screenshots/14-caregiver-activity.png)
 
 ---
 
