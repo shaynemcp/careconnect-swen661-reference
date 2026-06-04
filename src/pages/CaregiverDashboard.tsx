@@ -298,7 +298,7 @@ export default function CaregiverDashboard() {
   const hasAlerts = hasMissedMeds || upcomingAlerts.length > 0;
 
   return (
-    <div className="space-y-8 max-w-4xl">
+    <div className="space-y-8 max-w-4xl mx-auto">
 
       {/* ── Page heading ──────────────────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-4 flex-wrap">

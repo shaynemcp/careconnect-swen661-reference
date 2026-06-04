@@ -57,7 +57,7 @@ export default function Caregiver() {
   const grouped = groupByDate(notes);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-4xl mx-auto">
       {/* ── Page header ─────────────────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -147,7 +147,7 @@ export default function Caregiver() {
           <p className="text-lg font-medium">No notes yet. Add the first one above.</p>
         </div>
       ) : (
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:items-start">
           {grouped.map(([date, dayNotes]) => (
             <section key={date} aria-label={`Notes for ${formatDate(date)}`}>
               <h2 className="text-base font-semibold text-neutral-500 uppercase tracking-wide mb-3 border-b border-neutral-200 pb-2">

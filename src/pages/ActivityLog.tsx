@@ -139,7 +139,7 @@ export default function ActivityLog() {
   const grouped = groupByDay(log);
 
   return (
-    <div className="space-y-8 max-w-3xl">
+    <div className="space-y-8 max-w-4xl mx-auto">
 
       {/* ── Page heading ──────────────────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -192,7 +192,7 @@ export default function ActivityLog() {
           </p>
         </div>
       ) : (
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:items-start">
           {grouped.map(([dateKey, events]) => (
             <section key={dateKey} aria-label={`Activity for ${formatDateGroup(events[0].timestamp)}`}>
               <h2 className="text-base font-bold text-neutral-500 uppercase tracking-widest mb-3 pb-2 border-b-2 border-neutral-200">

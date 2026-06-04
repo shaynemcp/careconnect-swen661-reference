@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './auth/AuthContext';
+import { getSession } from './auth/mockAuth';
 import { AppProvider } from './context/AppContext';
 import { ProtectedRoute, RoleRoute, AuthRoute } from './components/ProtectedRoute';
 import Layout from './components/Layout';
@@ -29,11 +30,16 @@ import type { AppView } from './types';
 // ── Inner app shell ────────────────────────────────────────────────────────────
 
 function AppShell() {
-  const { role, setRole, signOut } = useAuth();
+  const { setRole, signOut } = useAuth();
 
-  // Initialise from the persisted role; default to patient if somehow null
-  const [view, setView] = useState<AppView>(
-    role === 'caregiver' ? 'caregiver' : 'patient',
+  // Initialise the view from the PERSISTED role (read synchronously from
+  // storage). The auth context's `role` hydrates asynchronously and is null on
+  // the first render, so deriving the view from it would default every fresh
+  // load — including direct loads of caregiver screens — to the patient view.
+  // Reading the persisted session here makes the caregiver chrome (sidebar +
+  // role chip) render consistently on every caregiver screen.
+  const [view, setView] = useState<AppView>(() =>
+    getSession()?.role === 'caregiver' ? 'caregiver' : 'patient',
   );
 
   // Switch role: update local view state AND persist the new role so the

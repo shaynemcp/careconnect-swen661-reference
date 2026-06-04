@@ -538,7 +538,7 @@ export default function ManageAppointments() {
   });
 
   return (
-    <div className="space-y-8 max-w-3xl">
+    <div className="space-y-8 max-w-4xl mx-auto">
 
       {/* ── Page heading ──────────────────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -598,7 +598,7 @@ export default function ManageAppointments() {
               </p>
             </div>
           ) : (
-            <ul className="space-y-4 list-none p-0 m-0" role="list">
+            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 list-none p-0 m-0" role="list">
               {sorted.map((appt) => (
                 <ApptRow
                   key={appt.id}
