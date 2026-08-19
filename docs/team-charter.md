@@ -159,7 +159,9 @@ repository and deliverables for that week.
 | --- | --- | --- |
 | Abel K. Tabor | Abel K. Tabor | |
 | Shayne McPherson | Shayne M | |
-| Quinton Coleman | | |
+| Quinton Coleman |Quinton Coleman | August 18,2026|
 
 > Signature status is mirrored from the SharePoint document. Quinton's signature line was
 > still blank at the time of this sync — confirm all three are signed before submission.
+
+
