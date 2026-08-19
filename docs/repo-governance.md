@@ -17,8 +17,8 @@ are in `.github/`, and the settings-side work is recorded here.
 
 Assignment 1, Part 4 requires all team members to be collaborators.
 
-- [ ] Add **Abel Tabor** — [`@abelktabor`](https://github.com/abelktabor) — with **Write** access
-- [ ] Add **Quinton Coleman** — [`@colemaninternational80-cmyk`](https://github.com/colemaninternational80-cmyk) — with **Write** access
+- [x] Add **Abel Tabor** — [`@abelktabor`](https://github.com/abelktabor) — with **Write** access ✅ *invite sent 2026-08-18*
+- [x] Add **Quinton Coleman** — [`@colemaninternational80-cmyk`](https://github.com/colemaninternational80-cmyk) — with **Write** access ✅ *added 2026-08-18*
 - [ ] Add the instructor as a collaborator (or make the repository public) so it is
       accessible for grading — the rubric's *Beginning* band is "repository not
       accessible to team/instructor"
@@ -123,7 +123,7 @@ gh label create accessibility --color 0E8A16 --description "WCAG conformance wor
 | Requirement | Where | Done |
 | --- | --- | --- |
 | Repository exists on GitHub | `shaynemcp/careconnect-swen661-reference` | ✅ |
-| All team members are collaborators | §1 above — Abel and Quinton pending | ☐ |
+| All team members are collaborators | §1 above — Abel and Quinton added 2026-08-18 | ✅ |
 | Instructor can access the repository | §1 above | ☐ |
 | README with project name and description | `README.md` | ✅ |
 | README lists team member names | `README.md` — Team E-Echo, all three members | ✅ |

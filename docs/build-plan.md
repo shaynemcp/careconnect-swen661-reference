@@ -234,7 +234,7 @@ These are enforced by CI and reviewed in pull requests. Full process detail live
 | **Add the missing Key Features section (8–12 prioritized features) to the SharePoint proposal** — draft ready in `project-proposal.md` §3 | Team | **Assignment 1 submission** |
 | Confirm the dual desktop OS target (Windows + macOS) with the instructor | Team | Proposal approval |
 | Collect Quinton's signature on the SharePoint charter | Abel Tabor (Doc Lead, W1–2) | Assignment 1 submission |
-| Add Abel and Quinton as repository collaborators | Shayne McPherson | Assignment 1 submission |
+
 | Update `ACCESSIBILITY.md` from WCAG 2.1 to 2.2 — adds SC 2.4.11, 2.5.7, 2.5.8, 3.2.6, 3.3.7, 3.3.8 | QA Lead | Assignment 6 |
 | Install Xcode, Android Studio, lcov, Expo CLI — see `environment-setup.md` §Gaps | Each member | Assignment 3 |
 | Windows members: install NVDA for desktop accessibility testing | Abel, Quinton | Assignment 9 |
