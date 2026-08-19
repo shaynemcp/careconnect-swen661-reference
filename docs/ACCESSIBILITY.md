@@ -1,3 +1,131 @@
+# Accessibility — CareConnect
+
+**Standard:** WCAG 2.2 Level AA — **non-negotiable and graded**
+**Design lean:** ADHD-friendly / cognitive-load reduction
+**Team:** E-Echo · **Owner:** QA / Testing Lead on rotation (Weeks 1–2: Quinton Coleman)
+
+> Accessibility is a **merge requirement** on this project, not a cleanup pass before
+> submission. Reviewers check it on every UI pull request (see the PR template).
+
+---
+
+## 1. Instructor's accessibility requirements
+
+Reproduced in full. This is the authoritative requirements list for the project.
+
+| Area | What to Do |
+|---|---|
+| Accessibility Standard | Follow WCAG 2.2 Level AA |
+| Screen Design | Keep screens simple, clean, and uncluttered |
+| Visual Distractions | Avoid unnecessary animation, flashing, auto-play, and moving content |
+| Navigation | Keep menus and buttons in consistent locations |
+| Task Steps | Break long tasks into short, numbered steps |
+| Progress | Show progress such as Step 2 of 4 |
+| Instructions | Use short, simple, direct language |
+| Memory Support | Do not make users remember information from previous screens |
+| Save and Resume | Allow users to save incomplete work and return later |
+| Attention Recovery | Clearly show where the user is and what to do next |
+| Notifications | Let users control reminders, frequency, and snooze options |
+| Important Information | Highlight medications, appointments, messages, and urgent tasks |
+| Buttons | Use large, clearly labeled buttons |
+| Forms | Use clear labels and simple error messages |
+| Errors | Explain exactly what is wrong and how to fix it |
+| Time Limits | Avoid unnecessary time limits |
+| Authentication | Make login simple; avoid unnecessary memory or cognitive challenges |
+| Keyboard Access | Make all important controls usable by keyboard where applicable |
+| Focus Indicator | Make keyboard focus clearly visible |
+| Dragging | Provide a button/tap alternative to drag-and-drop actions |
+| Color | Do not use color alone to communicate important information |
+| Contrast | Maintain appropriate text and control contrast |
+| Screen Readers | Add proper labels, headings, alternative text, and semantic structure |
+| Testing | Test whether a user can complete tasks without getting lost or overwhelmed |
+| ADHD Goal | Reduce distraction, cognitive load, memory demands, and unnecessary steps |
+
+---
+
+## 2. Requirement → implementation tracking
+
+Every row above, mapped to where it is enforced and its current state.
+**Status values:** `Not started` · `In progress` · `Implemented` · `Verified`
+(*Verified* means checked with a tool **and** by hand, and recorded in §4.)
+
+| # | Area | Where it is enforced | Status |
+|---|---|---|---|
+| 1 | Accessibility Standard | Whole product; gated by axe + Lighthouse in CI | Not started |
+| 2 | Screen Design | One primary action per screen; `apps/web` page components | Not started |
+| 3 | Visual Distractions | `motion` tokens guarded by `prefers-reduced-motion` | Not started |
+| 4 | Navigation | Shared layout/nav in `@careconnect/ui` | Not started |
+| 5 | Task Steps | `Task` / `TaskStep` types in `@careconnect/mock-data` | Not started |
+| 6 | Progress | `StepProgress` component in `@careconnect/ui` | **In progress** |
+| 7 | Instructions | Copy review on every UI PR | Not started |
+| 8 | Memory Support | Orientation bar; no cross-screen recall in any flow | Not started |
+| 9 | Save and Resume | `Task.currentStepIndex` persisted | Not started |
+| 10 | Attention Recovery | Orientation bar + "Next thing to do" card | Not started |
+| 11 | Notifications | `ReminderPreference` type — frequency, snooze, `maxRepeats` | Not started |
+| 12 | Important Information | Status styling + text labels, never color alone | Not started |
+| 13 | Buttons | `target.teamMinimum` = 44px in design tokens | Not started |
+| 14 | Forms | Shared field component with associated labels | Not started |
+| 15 | Errors | Error text states the problem **and** the fix | Not started |
+| 16 | Time Limits | No countdown forfeits an action; 10-sec undo is additive only | Not started |
+| 17 | Authentication | Sign-in flow; no memory puzzles (SC 3.3.8) | Not started |
+| 18 | Keyboard Access | Keyboard pass required on every UI PR | Not started |
+| 19 | Focus Indicator | `focusRing` tokens — 3px, 2px offset, 5.69:1 contrast | **Implemented** |
+| 20 | Dragging | No drag-only interactions permitted (SC 2.5.7) | Not started |
+| 21 | Color | Status conveyed by icon + text + color | **Implemented** (tokens documented) |
+| 22 | Contrast | `npm run check:contrast` — all pairs verified | **Verified** |
+| 23 | Screen Readers | Semantic landmarks, headings, alt text, live regions | Not started |
+| 24 | Testing | Mock-user sessions incl. an ADHD persona; §4 below | Not started |
+| 25 | ADHD Goal | Applies to every decision; reviewed per PR | Not started |
+
+---
+
+## 3. WCAG 2.2 AA success criteria new since 2.1
+
+The inherited conformance mapping in §5 was written against **WCAG 2.1**. Moving to
+2.2 adds the criteria below. Each needs its own verification.
+
+| Criterion | Level | What it requires | Status |
+|---|---|---|---|
+| **2.4.11** Focus Not Obscured (Minimum) | AA | The focused element is not fully hidden by sticky headers/footers | Not started |
+| **2.5.7** Dragging Movements | AA | Any drag action has a single-pointer alternative | Not started |
+| **2.5.8** Target Size (Minimum) | AA | Targets are at least 24×24 CSS px (team standard: 44×44) | Not started |
+| **3.2.6** Consistent Help | A | Help is in the same relative place on every page — this is the persistent "Call my caregiver" action | Not started |
+| **3.3.7** Redundant Entry | A | Information already given is not asked for again in the same process | Not started |
+| **3.3.8** Accessible Authentication (Minimum) | AA | No cognitive function test (memorization, puzzles) to log in | Not started |
+
+> SC 3.2.6 and 3.3.8 map directly onto Must-Have features 4 and 11 in the backlog.
+
+---
+
+## 4. Verification log
+
+Record every verification pass here. A criterion is not *Verified* until it appears
+in this table.
+
+| Date | Scope | Method | Tool / AT | Result | By |
+|---|---|---|---|---|---|
+| 2026-08-18 | Design tokens — all documented color pairs | Automated | `npm run check:contrast` | **PASS** — 12/12 pairs meet AA (lowest 3.10:1 on `border.default`, threshold 3:1) | Shayne |
+
+### Planned verification
+
+| When | What |
+|---|---|
+| Every PR | axe DevTools on changed screens; keyboard-only walkthrough |
+| Every PR (CI) | axe-core scan — fails on critical/serious; Lighthouse a11y ≥ 95 |
+| Assignment 6 | Mobile — VoiceOver (iOS) and TalkBack (Android) |
+| Assignment 9 | Desktop — NVDA (Windows) and/or VoiceOver (macOS), per ADR 0002 |
+| Assignment 10 | Web — full WCAG 2.2 AA audit, all 25 rows in §2 |
+
+---
+
+## 5. Appendix — inherited WCAG 2.1 conformance mapping
+
+> Carried over from the upstream reference implementation. **Written against
+> WCAG 2.1**, so it does not cover the six criteria in §3. Useful as a starting
+> point for the screens that already exist; supersede it as §2 fills in.
+
+---
+
 # CareConnect — Accessibility Documentation
 
 **SWEN 661 — Human Factors in Software Development**

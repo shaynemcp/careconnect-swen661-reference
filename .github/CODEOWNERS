@@ -10,17 +10,18 @@
 # Repository structure, CI, and tooling — Technical Lead
 /.github/               @shaynemcp
 /package.json           @shaynemcp
+/packages/              @shaynemcp
 /package-lock.json      @shaynemcp
-/vite.config.ts         @shaynemcp
-/tsconfig*.json         @shaynemcp
-/eslint.config.js       @shaynemcp
+/apps/web/vite.config.ts  @shaynemcp
+/apps/web/tsconfig*.json  @shaynemcp
+/apps/web/eslint.config.js @shaynemcp
 
 # Shared types and domain model
-/src/types/             @shaynemcp
-/src/context/           @shaynemcp
+/packages/mock-data/    @shaynemcp
+/packages/design-tokens/ @shaynemcp
 
 # Accessibility conformance — QA / Testing Lead (Weeks 1-2: Quinton)
-/ACCESSIBILITY.md       @shaynemcp
+/docs/ACCESSIBILITY.md  @shaynemcp
 
 # Course deliverables — Documentation Lead (Weeks 1-2: Abel)
 /docs/                  @shaynemcp

@@ -49,7 +49,13 @@ decision making, and conflict resolution.
 | **[Team Charter](docs/team-charter.md)** | Team information, communication, role rotation, git workflow, work distribution, conflict resolution |
 | **[Environment Setup](docs/environment-setup.md)** | Verified toolchain status on the development machine, gaps, and remediation commands |
 | **[Repository Governance](docs/repo-governance.md)** | Collaborators, branch protection, project board, labels, security hygiene |
-| **[Accessibility](ACCESSIBILITY.md)** | Conformance mapping across 21 success criteria — inherited from the reference app at **WCAG 2.1**; migration to the team's 2.2 standard is tracked in the build plan |
+| **[Accessibility](docs/ACCESSIBILITY.md)** | Conformance mapping across 21 success criteria — inherited from the reference app at **WCAG 2.1**; migration to the team's 2.2 standard is tracked in the build plan |
+| **[Architecture](docs/ARCHITECTURE.md)** | Monorepo shape, dependency direction, accessibility as architecture |
+| **[Setup](docs/SETUP.md)** | Install, run, scripts, Windows notes |
+| **[Testing](docs/TESTING.md)** | Test layers, gates, and the manual accessibility pass |
+| **[Data Model](docs/DATA-MODEL.md)** | Mock schema for patients, caregivers, medications, appointments, tasks |
+| **[Decisions (ADRs)](docs/decisions/)** | 0001 mobile framework · 0002 desktop OS — both open |
+| **[Contributing](CONTRIBUTING.md)** | Branch naming, PR flow, team norms |
 | **[Reference App README](docs/reference-app-readme.md)** | Archived upstream README with the screen-by-screen walkthrough |
 
 ### Canonical source documents
@@ -120,10 +126,11 @@ git clone https://github.com/shaynemcp/careconnect-swen661-reference.git carecon
 ```
 
 ```bash
-cd careconnect-adhd && npm install && cp .env.example .env && npm run dev
+cd careconnect-adhd && nvm use && npm install && cp .env.example .env && npm run dev:web
 ```
 
-The dev server starts at **http://localhost:5173**.
+The dev server starts at **http://localhost:5173**. One install at the repo root
+covers every workspace. Full detail in [docs/SETUP.md](docs/SETUP.md).
 
 > The app runs entirely on mock `localStorage` data — **no backend keys are required**.
 > If `ANTHROPIC_API_KEY` is absent, the landing-page assistant falls back to a scripted
@@ -145,47 +152,53 @@ Copy `.env.example` to `.env` and fill in only what you need:
 
 | Script | What it does |
 | --- | --- |
-| `npm run dev` | Start the Vite dev server on port 5173 |
-| `npm run build` | Production build to `/dist` |
-| `npm run preview` | Serve the production build locally |
-| `npm run lint` | ESLint across the project |
-| `npm run typecheck` | `tsc --noEmit` against `tsconfig.app.json` |
-| `npm run screenshots` | Regenerate `docs/screenshots/` via Playwright |
+| `npm run dev:web` | Vite dev server on port 5173 |
+| `npm run dev:desktop` | Electron shell (build the web app first) |
+| `npm run build` | Build every workspace |
+| `npm run lint` | ESLint across workspaces |
+| `npm run typecheck` | `tsc --noEmit` (strict) across workspaces |
+| `npm test` | Tests across workspaces |
+| `npm run check:contrast -w @careconnect/design-tokens` | Verify every color pair against WCAG 2.2 AA |
 
-> **Note:** a Jest test suite is **not yet configured**. Unit and component testing
-> arrives with the assignments that require it; the archived reference README mentions
-> `npm test`, but that script does not currently exist in `package.json`.
+> **Note:** Jest and Playwright are **not yet configured**, so `npm test` is currently a
+> no-op and the CI coverage gate is inactive. See [docs/TESTING.md](docs/TESTING.md).
 
 ---
 
 ## Project structure
 
-```
-careconnect-adhd/
-├── .github/
-│   ├── ISSUE_TEMPLATE/          # Bug, feature/requirement, accessibility issue
-│   ├── workflows/ci.yml         # Lint, typecheck, build on every PR
-│   ├── branch-protection.json   # Branch protection payload for the GitHub API
-│   ├── CODEOWNERS               # Required reviewers per area
-│   └── PULL_REQUEST_TEMPLATE.md # Includes a mandatory accessibility checklist
-├── docs/                        # Course deliverables and engineering docs
-│   └── screenshots/             # App screenshots + environment evidence
-├── public/                      # PWA manifest, icons, service worker
-├── scripts/                     # Icon generation, screenshots, PWA/responsive checks
-├── src/
-│   ├── auth/                    # Mock authentication + context
-│   ├── components/              # Shared accessible component library
-│   ├── context/                 # Application state
-│   ├── data/                    # Mock data stores (localStorage)
-│   ├── pages/                   # Route-level screens
-│   ├── pwa/                     # Service worker registration
-│   └── types/                   # Shared TypeScript types
-├── supabase/functions/          # Edge function for the assistant (optional)
-├── ACCESSIBILITY.md             # WCAG conformance mapping (2.1 — migrating to 2.2)
-└── .gitignore                   # Four labeled sections: React, Flutter, RN, Electron
-```
+npm workspaces monorepo. Full rationale in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
----
+```
+careconnect/
+├── .github/
+│   ├── workflows/               # CI, nightly E2E
+│   ├── ISSUE_TEMPLATE/          # Bug, feature/task, accessibility issue
+│   ├── PULL_REQUEST_TEMPLATE.md # Includes the mandatory accessibility checklist
+│   ├── CODEOWNERS
+│   └── dependabot.yml
+├── apps/
+│   ├── web/                     # React 18 + Vite + TS (strict) + Tailwind, PWA
+│   ├── mobile/                  # ⚠️ placeholder — framework undecided (ADR 0001)
+│   └── desktop/                 # Electron shell over the web build (ADR 0002)
+├── packages/
+│   ├── ui/                      # Shared accessible components
+│   ├── design-tokens/           # Colors/spacing/type — contrast-verified
+│   └── mock-data/               # Domain types + fictional fixtures
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── ACCESSIBILITY.md         # Instructor's requirements table, tracked per row
+│   ├── SETUP.md
+│   ├── TESTING.md
+│   ├── DATA-MODEL.md
+│   ├── decisions/               # ADRs — 0001 mobile framework, 0002 desktop OS
+│   └── demos/                   # Dated log of weekly walkthrough videos
+├── .nvmrc                       # Node 22.14.0
+├── .editorconfig                # LF endings across macOS + Windows machines
+├── .env.example
+├── package.json                 # Workspace root
+└── CONTRIBUTING.md
+```
 
 ## Contributing
 
