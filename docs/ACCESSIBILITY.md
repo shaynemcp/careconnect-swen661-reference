@@ -93,7 +93,9 @@ The inherited conformance mapping in §5 was written against **WCAG 2.1**. Movin
 | **3.3.7** Redundant Entry | A | Information already given is not asked for again in the same process | Not started |
 | **3.3.8** Accessible Authentication (Minimum) | AA | No cognitive function test (memorization, puzzles) to log in | Not started |
 
-> SC 3.2.6 and 3.3.8 map directly onto Must-Have features 4 and 11 in the backlog.
+> SC 3.2.6 maps onto Must-Have feature 4 (persistent "Call my caregiver"), and
+> SC 3.3.8 onto Should-Have feature 11 (role chooser / low-cognitive-load sign-in).
+> SC 3.3.7 is also covered by feature 11.
 
 ---
 

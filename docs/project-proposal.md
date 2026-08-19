@@ -58,83 +58,100 @@ Electron for desktop, React + Vite for web.
 
 ## 3. Key features
 
-> **⚠️ GAP — ACTION REQUIRED BEFORE SUBMISSION.** Assignment 1, Part 3 requires a
-> **Key Features** section listing **8–12 major features prioritized as Must-Have,
-> Should-Have, and Nice-to-Have**. The rubric's *Proficient* band names "8-12 prioritized
-> features" explicitly, and this section is **not present in the SharePoint document**.
->
-> The list below is a **proposed draft** derived from the description, constraints, and
-> success criteria the team already wrote. It is not yet team-approved. Review it, edit it,
-> and **paste the agreed version into the SharePoint document** — that is the graded
-> artifact, not this file.
+> **Sync note.** This list mirrors the team's agreed feature backlog — **12 features**,
+> within the 8–12 that Assignment 1 Part 3 requires. Acceptance criteria are included
+> because the rubric's *Highly Proficient* band asks for "detailed feature descriptions
+> with acceptance criteria." **Verify this section also exists in the SharePoint
+> document**, which is the graded artifact.
 
-Acceptance criteria are included because the rubric's *Highly Proficient* band asks for
-"detailed feature descriptions with acceptance criteria."
+Prioritized **Must-Have** (required for a passing product), **Should-Have** (planned;
+first to be descoped under schedule pressure), and **Nice-to-Have** (built only if
+ahead of schedule).
 
 ### Must-Have
 
-**F1 — Stepped task breakdown with visible progress**
-Multi-step daily tasks are presented as short numbered steps showing position and progress.
-*Acceptance:* one step visible at a time; progress indicator states position ("Step 2 of
-5"); no step requires information remembered from a previous screen; save-and-resume works
-after leaving mid-task.
+**1. Today Home Screen**
+A persistent orientation bar (who you are, the day and time, where you are in the app)
+above a single prominent "Next thing to do" card.
+*Acceptance:* exactly one primary action per screen; remaining items are visually
+subordinate; when nothing is due, a calm confirmed-empty state appears rather than a
+blank region; the orientation bar appears on every patient screen and is exposed as a
+landmark.
 
-**F2 — Medication tracking with visible status**
-Each medication shows its state (taken / due / overdue) with a timestamp.
-*Acceptance:* status visible in the list without opening a detail view; announced via
-`role="status"`; conveyed by text and icon, never color alone.
+**2. Medications Screen**
+Pill images, plain-language dose descriptions, always-visible status, and a 10-second
+undo on every action.
+*Acceptance:* status (taken / due / overdue) and time taken are visible in the list
+without opening a detail view; status is carried by text and icon, never color alone;
+changes announce through an ARIA live region; every dose action offers a 10-second undo
+that is keyboard reachable and announced.
 
-**F3 — Time-aware reminders**
-Reminders anchored to the day's schedule, respecting the no-time-pressure constraint.
-*Acceptance:* no countdown that forfeits an action on expiry; reminders restate what and
-when in plain language; dismissible without penalty.
+**3. Appointments Screen**
+Chronological appointments with full-word dates, location, and who is accompanying the
+patient.
+*Acceptance:* no bare numeric dates such as "8/25" anywhere; dates render as "Tuesday,
+August 25"; ordering is strictly chronological; each entry states its location and who,
+if anyone, is taking the patient.
 
-**F4 — Appointment schedule in plain language**
-Chronological appointments with full-word dates, location, and purpose.
-*Acceptance:* no bare numeric dates; strictly chronological ordering; who is attending is
-stated when relevant.
+**4. Persistent "Call My Caregiver" Action**
+A help action in the same relative position on every screen.
+*Acceptance:* reachable within one interaction from every patient screen; consistent
+location across all screens, satisfying **SC 3.2.6 Consistent Help**; target at least
+44×44px.
 
-**F5 — Caregiver visibility dashboard**
-A low-noise view of what has been done and what needs attention.
-*Acceptance:* alerts use `role="alert"`; distinguishes done / missed / upcoming without
-requiring the patient to self-report; caregiver edits propagate to patient screens.
+**5. Reminders**
+Medication and appointment notifications with user control over frequency and snooze.
+*Acceptance:* reminders can be disabled entirely; lead time configurable; snooze options
+offered and configurable; a hard cap on repeats prevents nagging; no reminder forfeits
+an action when it expires.
 
-**F6 — Accessible create/edit forms with clear error messages**
-Caregiver management screens for medications, appointments, and tasks.
-*Acceptance:* every input has a programmatically associated label; errors are announced,
-tied to their field, and describe the fix; delete requires explicit confirmation.
+**6. Installable PWA with Offline Access**
+*Acceptance:* passes installability checks; the current day's medications and
+appointments render with the network disconnected; the UI states plainly when data was
+last synced.
 
-**F7 — WCAG 2.2 Level AA conformance across all screens and platforms**
-*Acceptance:* zero axe DevTools violations; Lighthouse accessibility ≥ 95; full keyboard-only
-walkthrough; NVDA, VoiceOver, and TalkBack passes; no color-only signaling; adequate contrast.
-
-**F8 — Large labeled buttons and uncluttered screens**
-The ADHD-friendly design lean, applied as a build requirement rather than a style note.
-*Acceptance:* targets meet WCAG 2.2 SC 2.5.8 (24×24 CSS px minimum; the team standard is
-44×44); one primary action per screen; no unnecessary animation; `prefers-reduced-motion`
-honored.
+**7. Accessibility Engineered Into Every Screen**
+WCAG 2.2 Level AA as a build requirement, not a later audit.
+*Acceptance:* 4.5:1 minimum text contrast (3:1 for large text and UI components);
+complete keyboard operability with no traps; focus visible against every background;
+ARIA live regions for status changes; 44×44px targets, exceeding the 24×24px of
+**SC 2.5.8**; 320px reflow with no horizontal scrolling; `prefers-reduced-motion`
+honored; color never the sole carrier of meaning; zero critical/serious axe violations;
+Lighthouse accessibility ≥ 95.
 
 ### Should-Have
 
-**F9 — Save-and-resume across sessions**
-*Acceptance:* an interrupted multi-step task resumes at the same step after the app is
-closed and reopened.
+**8. Caregiver Dashboard**
+Adherence summary, an alerts region for missed or overdue items, and a recent-activity
+timeline.
+*Acceptance:* alerts announce through an ARIA alert region; distinguishes completed,
+missed, and upcoming without requiring the patient to self-report; the patient can see
+exactly what the caregiver can see.
 
-**F10 — Activity history for caregivers**
-A timestamped log of completed, skipped, and missed items.
-*Acceptance:* available as text, not chart-only; no guilt or streak-breaking framing.
+**9. Manage Medications (Caregiver)**
+*Acceptance:* every input has a programmatically associated visible label; errors
+identify the field, state what is wrong, and state how to fix it; incomplete work saves
+and resumes; deletion requires explicit confirmation; edits propagate to patient screens.
 
-**F11 — Offline access to the day's schedule**
-*Acceptance:* the day's medications and appointments render with the network offline; the
-UI states plainly when data was last synced.
+**10. Manage Appointments (Caregiver)**
+*Acceptance:* identical form, validation, save-and-resume, and delete-confirmation
+behavior as feature 9 — consistency between the two screens is itself a requirement.
+
+**11. Role Chooser with Low-Cognitive-Load Sign-In**
+A post-sign-in choice between Care Recipient and Caregiver, persisted for later sessions.
+*Acceptance:* the role choice persists and is not asked again; sign-in imposes no
+cognitive function test such as a memory puzzle, satisfying **SC 3.3.8 Accessible
+Authentication**; no already-provided information is requested twice in the same
+process, satisfying **SC 3.3.7 Redundant Entry**.
 
 ### Nice-to-Have
 
-**F12 — Adherence trends over time**
-*Acceptance:* neutral framing; text alternative to any chart.
-
-**F13 — Quick-contact action for the caregiver**
-*Acceptance:* reachable within one interaction from every primary screen.
+**12. Shared Accessible Component Library and Design-Token System**
+A single component library and token set backing the web, mobile, and desktop builds.
+*Acceptance:* colors defined once as tokens with recorded contrast ratios, verified
+automatically (`npm run check:contrast`); components ship keyboard- and
+screen-reader-ready so accessibility work is done once rather than per platform;
+behavior and styling stay consistent across all three platforms.
 
 ---
 
