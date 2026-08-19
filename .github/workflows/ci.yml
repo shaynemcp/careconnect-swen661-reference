@@ -77,6 +77,13 @@ jobs:
       - name: Wait for the server
         run: npx --yes wait-on http://localhost:4173 --timeout 60000
 
+      # @axe-core/cli bundles a ChromeDriver pinned to a specific Chrome major
+      # version, which drifts from whatever the runner image ships. Install a
+      # matched Chrome + ChromeDriver pair first, otherwise the scan dies with
+      # "session not created" before it evaluates a single rule.
+      - name: Install matched Chrome + ChromeDriver
+        run: npx --yes browser-driver-manager install chrome
+
       # Fails the build on critical/serious violations only. Moderate and minor
       # are reported for triage but do not block - see docs/TESTING.md.
       - name: axe-core scan
