@@ -8,7 +8,7 @@ export interface PatientProfile {
 }
 
 interface AppContextValue {
-  /** The care-recipient profile — always "Margaret" in the mock */
+  /** The care-recipient profile — always "Jordan" in the mock */
   patient: PatientProfile;
   /** Overwrite the patient profile and persist to localStorage */
   setPatient: (profile: PatientProfile) => void;
@@ -21,9 +21,9 @@ const PATIENT_KEY = 'careconnect_patient';
 function loadPatient(): PatientProfile {
   try {
     const raw = localStorage.getItem(PATIENT_KEY);
-    return raw ? (JSON.parse(raw) as PatientProfile) : { name: 'Margaret' };
+    return raw ? (JSON.parse(raw) as PatientProfile) : { name: 'Jordan' };
   } catch {
-    return { name: 'Margaret' };
+    return { name: 'Jordan' };
   }
 }
 

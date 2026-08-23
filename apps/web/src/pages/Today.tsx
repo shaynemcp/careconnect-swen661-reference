@@ -144,7 +144,7 @@ function AllDoneCard() {
       <div>
         <p className="text-2xl font-bold text-success-800">All done for today!</p>
         <p className="text-base text-success-700 mt-2">
-          You've completed everything on your list. What a wonderful day, Margaret.
+          You've completed everything on your list. What a wonderful day, Jordan.
         </p>
       </div>
     </div>
@@ -367,7 +367,7 @@ export default function Today() {
           date/time/name context, so the h1 here is the primary page title. */}
       <div>
         <h1 className="text-3xl font-bold text-neutral-800 leading-tight">
-          Here's your day, Margaret
+          Here's your day, Jordan
         </h1>
         <p className="mt-1 text-lg text-neutral-500">
           {doneCount} of {items.length} things done today
@@ -462,9 +462,9 @@ export default function Today() {
             <BigActionTile
               icon={<PhoneCall className="w-9 h-9" />}
               label="Call Caregiver"
-              description="Call Joyce — 07700 900 456"
+              description="Call Sam — (202) 555-0112"
               colour="success"
-              onClick={() => { window.location.href = 'tel:07700900456'; }}
+              onClick={() => { window.location.href = 'tel:2025550112'; }}
             />
           </div>
         </section>

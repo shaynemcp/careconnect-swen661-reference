@@ -10,8 +10,8 @@ export default function RoleChooser() {
   const navigate = useNavigate();
 
   function choose(role: 'patient' | 'caregiver') {
-    // Persist the mock patient profile (always "Margaret")
-    setPatient({ name: 'Margaret' });
+    // Persist the mock patient profile (always "Jordan")
+    setPatient({ name: 'Jordan' });
     setRole(role);
     navigate('/app');
   }

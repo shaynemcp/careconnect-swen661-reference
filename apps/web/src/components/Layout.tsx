@@ -116,9 +116,9 @@ interface LayoutProps {
 }
 
 // ── Caregiver contact for the "Call" button ────────────────────────────────────
-// In mock data Joyce Adeyemi is the caregiver carer contact.
-const CAREGIVER_PHONE = '07700900456';
-const CAREGIVER_DISPLAY = 'Joyce — 07700 900 456';
+// In mock data Sam Rivera is the caregiver carer contact.
+const CAREGIVER_PHONE = '2025550112';
+const CAREGIVER_DISPLAY = 'Sam — (202) 555-0112';
 
 // ── Component ──────────────────────────────────────────────────────────────────
 

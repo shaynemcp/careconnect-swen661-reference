@@ -48,9 +48,9 @@ export const appointments: Appointment[] = [
       address: '12 Greenfield Road, Westfield',
       type: 'clinic',
     },
-    caregiver: 'Joyce Adeyemi',
+    caregiver: 'Sam Rivera',
     notes:
-      'Joyce will collect you at 10:00. Remember to bring your medicines list with you.',
+      'Sam will collect you at 10:00. Remember to bring your medicines list with you.',
     isInMyDay: true,
   },
   {
@@ -80,9 +80,9 @@ export const appointments: Appointment[] = [
       address: '12 Greenfield Road, Westfield',
       type: 'clinic',
     },
-    caregiver: 'Joyce Adeyemi',
+    caregiver: 'Sam Rivera',
     notes:
-      'Do not eat or drink anything except plain water from midnight the night before. Joyce will collect you at 8:15.',
+      'Do not eat or drink anything except plain water from midnight the night before. Sam will collect you at 8:15.',
     isInMyDay: false,
   },
   {
@@ -125,7 +125,7 @@ export const appointments: Appointment[] = [
       address: '3 Riverside Walk, Westfield',
       type: 'clinic',
     },
-    caregiver: 'Joyce Adeyemi',
+    caregiver: 'Sam Rivera',
     notes: 'Wear comfortable, loose-fitting clothing. The session lasts about 45 minutes.',
     isInMyDay: false,
   },
