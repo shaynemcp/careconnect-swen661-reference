@@ -1,0 +1,26 @@
+# Blocks a pull request that introduces a dependency with a known vulnerability
+# or a licence we cannot ship under. This runs on the diff, so it catches the
+# problem at review time rather than in a Dependabot alert weeks later.
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+        with:
+          # Moderate and above blocks the merge. Low is surfaced in the summary
+          # for triage without stopping the team.
+          fail-on-severity: moderate
+          comment-summary-in-pr: always
+          deny-licenses: AGPL-3.0, GPL-3.0

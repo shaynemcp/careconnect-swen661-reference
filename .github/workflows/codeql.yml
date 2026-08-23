@@ -1,0 +1,41 @@
+# Static analysis for the JavaScript/TypeScript in this repo.
+#
+# CareConnect handles medication and appointment data. Even though every record
+# in this repo is synthetic, the code paths we build here are the ones a real
+# deployment would run, so we scan them like they matter.
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Monday 09:00 UTC — a weekly sweep catches advisories published after a merge.
+    - cron: '0 9 * * 1'
+
+# Least privilege: CodeQL needs to read the code and write its findings.
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    name: Analyze (javascript-typescript)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:javascript-typescript
