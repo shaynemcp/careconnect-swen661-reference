@@ -1,3 +1,8 @@
+<!-- ⚠️ BASE REPOSITORY CHECK — this repo is a fork.
+     GitHub defaults the base to aliminagar/careconnect-swen661, which we cannot merge into.
+     Confirm the base repository reads shaynemcp/careconnect-swen661-reference before opening.
+     Using the CLI? `gh pr create --base main` targets our repo correctly. -->
+
 ## What this changes
 
 <!-- One or two sentences. What does this PR do, and why? -->

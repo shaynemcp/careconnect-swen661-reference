@@ -157,23 +157,79 @@ behavior and styling stay consistent across all three platforms.
 
 ## 4. Platform deployment plan
 
-| Platform | Technology | Target | Course phase |
-| --- | --- | --- | --- |
-| **Mobile** | Flutter | Android and iOS | Assignments 3–4 |
-| **Mobile** | React Native | Android and iOS | Assignments 5–6 |
-| **Desktop** | Electron | **Windows and macOS** | Assignments 7–9 |
-| **Web** | React + Vite | Responsive web application | Assignment 10 |
+CareConnect ships to three platform families using the course-wide toolchain. Each row
+below is a graded deliverable, so the plan is written as a build-and-verify commitment
+rather than a statement of intent.
 
-**Desktop OS note.** Assignment 1's instructions ask teams to choose **one** desktop OS
-(Windows, macOS, *or* Linux). This team's assigned platform-coverage constraint specifies
-**both Windows and macOS**, so the proposal targets both, and the team accepts the larger
-build and QA surface that follows (recorded as a risk in §6). The team's OS mix supports
-this directly: two members develop on Windows and one on macOS, so both targets can be
-built and accessibility-tested natively. **Confirm this deviation with the instructor when
-the proposal is approved** — if a single OS is required, drop to macOS or Windows and move
-the other to a future iteration.
+| Platform | Technology | Target | Build output | Assignment |
+| --- | --- | --- | --- | --- |
+| **Mobile** | Flutter | Android and iOS | `.apk` (Android), simulator build (iOS) | 3–4, 6 |
+| **Mobile** | React Native + Expo | Android and iOS | Expo dev build / `.apk` | 5–6 |
+| **Desktop** | Electron + electron-builder | **Windows and macOS** | `.exe` (NSIS), `.dmg` | 7–9 |
+| **Web** | React + Vite | Responsive PWA, installable | Static bundle | 10–11 |
 
-**Linux** is not in scope and remains a possible future iteration.
+### Desktop: targeting two operating systems
+
+Assignment 1's template asks teams to choose **one** desktop OS. This team's assigned
+platform-coverage constraint specifies **both Windows and macOS**, so the proposal targets
+both. Where the template and the assigned constraint conflict, the assigned constraint
+governs; this is flagged for instructor confirmation in §7.
+
+The team's hardware makes this feasible rather than aspirational. Electron produces
+platform-specific installers that must be built and screen-reader tested on the target OS:
+
+| OS | Built and tested by | Screen reader |
+| --- | --- | --- |
+| Windows 10 | Abel Tabor, Quinton Coleman | NVDA |
+| macOS | Shayne McPherson | VoiceOver |
+
+Two members on Windows and one on macOS means both targets are covered natively, with no
+virtual machines and no untested build. The cost is roughly double the desktop QA surface,
+which is recorded as the team's leading schedule risk in §6.
+
+**Linux is out of scope** and remains a possible future iteration.
+
+### Mobile: a hardware constraint worth stating plainly
+
+Android builds can be produced by any team member on any operating system via Android
+Studio. **iOS builds cannot.** Xcode runs only on macOS, so every iOS build, simulator
+run, and VoiceOver-on-iOS accessibility pass depends on the one macOS machine on this team.
+
+Consequences the team accepts:
+
+- iOS work is scheduled around a single member's availability and is not parallelizable.
+- Android is the primary mobile verification target for day-to-day development; iOS is
+  verified at each assignment boundary rather than continuously.
+- If that machine is unavailable during Assignments 4–6, iOS evidence is the deliverable
+  at risk, and the mitigation is to front-load iOS screenshots and screen-reader captures
+  early in each of those weeks.
+
+### Web: the primary accessibility proving ground
+
+The React + Vite build is a responsive, installable PWA with offline access to the current
+day's medications and appointments, per Must-Have feature 6. It is also where automated
+accessibility verification runs in CI on every pull request — axe-core across WCAG 2.2 AA
+rules, plus a Lighthouse accessibility budget — because the web build is the only target
+those tools drive directly. Conformance findings there propagate to the shared component
+library, so a fix made once benefits all three platforms.
+
+Deployment for Assignment 11 targets a static host (Netlify, Vercel, or GitHub Pages).
+
+### Distribution scope
+
+**App store distribution is explicitly out of scope.** Publishing to the Apple App Store
+and Google Play requires paid developer enrollment and review cycles measured in weeks,
+neither of which fits a twelve-week course. Deliverables are therefore locally built
+installers and application bundles, evidenced by build logs, screenshots, and recorded
+walkthroughs, with the web build deployed to a public URL.
+
+### Shared foundation
+
+All three platform families draw on one npm workspaces monorepo — `apps/web`,
+`apps/desktop`, `apps/mobile`, and shared `packages/{ui,design-tokens,mock-data}`. Design
+tokens are defined once with recorded contrast ratios and verified automatically in CI, so
+a WCAG 2.2 AA colour decision is made once and inherited everywhere rather than
+re-litigated per platform.
 
 ---
 
