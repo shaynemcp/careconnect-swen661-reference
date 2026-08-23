@@ -55,12 +55,12 @@ export default function Home({ view }: HomeProps) {
             </span>
             <div>
               <h1 className="text-2xl font-bold text-white">
-                {isPatient ? `${greeting}, Dorothy!` : `${greeting}, Joyce!`}
+                {isPatient ? `${greeting}, Jordan!` : `${greeting}, Sam!`}
               </h1>
               <p className="text-calm-100 mt-1 text-base">
                 {isPatient
                   ? `Today is ${todayDate}. Here is your day at a glance.`
-                  : `Viewing Dorothy's care plan for ${todayDate}.`}
+                  : `Viewing Jordan's care plan for ${todayDate}.`}
               </p>
             </div>
           </div>

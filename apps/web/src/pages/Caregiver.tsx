@@ -44,7 +44,7 @@ export default function Caregiver() {
     const newNote: CaregiverNote = {
       id: `n${Date.now()}`,
       date: new Date().toISOString().split('T')[0],
-      author: 'Joyce Adeyemi',
+      author: 'Sam Rivera',
       note: draft.trim(),
       priority: draftPriority,
     };
@@ -65,7 +65,7 @@ export default function Caregiver() {
             <ShieldCheck className="w-6 h-6 text-calm-600" aria-hidden="true" />
             Caregiver Notes
           </h1>
-          <p className="text-neutral-500 mt-1">Daily observations for Dorothy's care team</p>
+          <p className="text-neutral-500 mt-1">Daily observations for Jordan's care team</p>
         </div>
         <button
           onClick={() => setComposing((v) => !v)}

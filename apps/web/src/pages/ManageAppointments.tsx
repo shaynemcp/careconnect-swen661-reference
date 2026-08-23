@@ -289,7 +289,7 @@ function ApptForm({
           label="Appointment title (required)"
           required
           placeholder="e.g. Blood pressure check — Dr. Sharma"
-          hint="Use plain language Margaret will recognise."
+          hint="Use plain language Jordan will recognise."
           value={form.title}
           onChange={setField('title')}
           error={errors.title}
@@ -374,8 +374,8 @@ function ApptForm({
         <div className="space-y-5">
           <Field
             label="Assigned caregiver"
-            placeholder="e.g. Joyce Adeyemi"
-            hint="Optional — shown to Margaret as 'Joyce is taking you to this appointment'."
+            placeholder="e.g. Sam Rivera"
+            hint="Optional — shown to Jordan as 'Sam is taking you to this appointment'."
             value={form.caregiver}
             onChange={setField('caregiver')}
           />
@@ -383,7 +383,7 @@ function ApptForm({
           <Field
             label="Patient notes"
             multiline
-            placeholder="Instructions or reassurance for Margaret, e.g. 'No need to fast beforehand.'"
+            placeholder="Instructions or reassurance for Jordan, e.g. 'No need to fast beforehand.'"
             hint="Optional — shown in plain language on the patient appointments screen."
             value={form.notes}
             onChange={setField('notes')}
@@ -548,7 +548,7 @@ export default function ManageAppointments() {
             Manage appointments
           </h1>
           <p className="mt-1 text-lg text-neutral-500">
-            Add, edit, or remove Margaret's upcoming appointments
+            Add, edit, or remove Jordan's upcoming appointments
           </p>
         </div>
 
@@ -594,7 +594,7 @@ export default function ManageAppointments() {
               </span>
               <p className="text-xl font-bold text-neutral-800">No appointments yet</p>
               <p className="text-neutral-500">
-                Use the "Add appointment" button above to schedule Margaret's first visit.
+                Use the "Add appointment" button above to schedule Jordan's first visit.
               </p>
             </div>
           ) : (
